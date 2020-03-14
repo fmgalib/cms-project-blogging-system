@@ -1,4 +1,4 @@
-
+<?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
 
 <body>
@@ -38,7 +38,7 @@
 
             </div>
 
-            
+
 
             <!-- Blog Sidebar Widgets Column -->
             <?php include "includes/sidebar.php"; ?>

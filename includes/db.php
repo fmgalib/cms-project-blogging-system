@@ -3,10 +3,10 @@
 
 $connection = mysqli_connect('localhost', 'root', '', 'cms');
 
-if ($connection) {
+// if ($connection) {
 	
-	echo "We are connected";
-}
+// 	echo "We are connected";
+// }
 
 
 
