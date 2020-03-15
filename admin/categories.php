@@ -42,7 +42,7 @@
 
                         <div class="col-xs-6">
 
-                            <table class="table table-hover">
+                            <table class="table table-bordered table-hover">
                               <thead class="thead-light">
                                 <tr>
                                   <th scope="col">ID</th>
@@ -50,10 +50,27 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                </tr>
+
+
+
+                                <?php 
+
+                                    $query = "SELECT * FROM categories";
+                                    $categories_table = mysqli_query($connection, $query);
+
+
+                                    while ($row = mysqli_fetch_assoc($categories_table)) {
+
+                                    $cat_id = $row['cat_id'];
+                                    $cat_title = $row['cat_title'];
+
+                                    echo "<tr>";
+                                    echo "<td >{$cat_id}</td>";
+                                    echo "<td >{$cat_title}</td>";
+                                    echo "</tr>";
+                                    }
+
+                                ?>
 
                               </tbody>
                             </table>
