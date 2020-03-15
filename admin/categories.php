@@ -50,7 +50,7 @@
                         }
 
                     ?>
-                    
+                    <!-- Add category form -->
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="cat_title">Add Category</label>
@@ -58,9 +58,13 @@
                         </div>
 
                         <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="submit">
+                            <input class="btn btn-primary" type="submit" name="submit" value="Add">
                         </div>
                     </form>
+
+
+                    <!-- Edit category form -->
+                    <?php include "includes/update_category.php" ?>
 
                 </div>
 
@@ -73,7 +77,7 @@
                         <tr>
                           <th scope="col">ID</th>
                           <th scope="col">Category Title</th>
-                          <th scope="col">Action</th>
+                          <th scope="col" colspan="2" >Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -93,6 +97,7 @@
                             echo "<tr>";
                             echo "<td >{$cat_id}</td>";
                             echo "<td >{$cat_title}</td>";
+                            echo "<td ><a href= 'categories.php?edit={$cat_id}'>Edit</td>";
                             echo "<td ><a href= 'categories.php?delete={$cat_id}'>Delete</td>";
                             echo "</tr>";
                             }
@@ -106,9 +111,9 @@
                             if (isset($_GET['delete'])) {
                                 $delete_cat_id = $_GET['delete'];
 
-                                $query = "DELETE FROM categories WHERE cat_id = '{$delete_cat_id}' ";
+                                $query = "DELETE FROM categories WHERE cat_id = '$delete_cat_id' ";
                                 $delete_query = mysqli_query($connection, $query);
-                                
+
                                 header("Location: categories.php");
                             }
 
