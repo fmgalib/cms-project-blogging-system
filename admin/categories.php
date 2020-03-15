@@ -40,6 +40,25 @@
 
                         </div>
 
+                        <div class="col-xs-6">
+
+                            <table class="table table-hover">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">ID</th>
+                                  <th scope="col">Category Title</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Mark</td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+
+                        </div>    
 
                         
                     </div>
