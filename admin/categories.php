@@ -24,10 +24,34 @@
                             
                         </h1>
 
-
+                        <!-- Add Ccategory -->
                         <div class="col-xs-6">
+
+                            <?php
+
+                                if (isset($_POST['submit'])) {
+                                        
+                                    $cat_title = $_POST['cat_title'];
+
+                                    if ($cat_title == "" || empty($cat_title)) {
+                                        
+                                        echo "This field should not be empty";
+                                    }else{
+
+                                        $query = "INSERT INTO categories (cat_title) VALUES ('$cat_title')";
+                                        $create_category_query = mysqli_query($connection, $query);
+
+                                        if (!$create_category_query) {
+                                            die("Query failed" . mysqli_error($connection));
+                                        }
+
+                                    }
+
+                                }
+
+                            ?>
                             
-                            <form action="" method="">
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label for="cat_title">Add Category</label>
                                     <input class="form-control" type="text" name="cat_title">
@@ -40,6 +64,8 @@
 
                         </div>
 
+
+                        <!-- Category Table -->
                         <div class="col-xs-6">
 
                             <table class="table table-bordered table-hover">
@@ -50,8 +76,6 @@
                                 </tr>
                               </thead>
                               <tbody>
-
-
 
                                 <?php 
 
