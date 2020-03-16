@@ -26,7 +26,7 @@
 
                 
 
-                <table class="table">
+                <table class="table table-hover">
                   <thead class="thead-dark">
                     <tr>
                       <th scope="col">ID</th>
@@ -64,7 +64,7 @@
                         echo "<td>$post_title</td>";
                         echo "<td>$post_category_id</td>";
                         echo "<td>$post_status</td>";
-                        echo "<td>$post_image</td>";
+                        echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
                         echo "<td>$post_tags</td>";
                         echo "<td>$post_comment_count</td>";
                         echo "<td>$post_date</td>";
