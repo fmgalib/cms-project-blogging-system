@@ -17,9 +17,24 @@
           <th scope="col">Tags</th>
           <th scope="col">Comments</th>
           <th scope="col">Date</th>
+          <th scope="col" colspan="2">Action</th>
         </tr>
       </thead>
       <tbody>
+
+
+        <?php  
+        // Delete posts
+
+        if (isset($_GET['delete'])) {
+          $delete_post_id = $_GET['delete'];
+
+          $query = "DELETE FROM posts WHERE post_id = '$delete_post_id'";
+          $delete_query = mysqli_query($connection, $query);
+        }
+
+
+        ?>
 
         <?php
 
@@ -47,6 +62,8 @@
             echo "<td>$post_tags</td>";
             echo "<td>$post_comment_count</td>";
             echo "<td>$post_date</td>";
+            echo "<td><a href='' >Edit</a></td>";
+            echo "<td><a href='posts.php?delete=$post_id'>Delete</a></td>";
             echo "</tr>";
         }
 
