@@ -42,8 +42,29 @@
         <input value="<?php echo $post_author ?>" type="text" class="form-control" name="post_author">
       </div>
       <div class="form-group">
-        <label for="post_category_id">Post Category</label>
-        <input value="<?php echo $post_category_id ?>" type="text" class="form-control" name="post_category_id">
+        <label for="post_category">Post Category</label><br>
+        <select name="post_category" id="">
+          
+
+          <?php
+
+            $query = "SELECT * FROM categories";
+            $select_categories_id = mysqli_query($connection, $query);
+            confirm_query($select_categories_id);
+
+            while ($row = mysqli_fetch_assoc($select_categories_id)) {
+
+            $cat_id = $row['cat_id'];
+            $cat_title = $row['cat_title'];
+
+            echo "<option value='' >$cat_title</option>";
+            
+           } 
+
+           ?>
+
+
+        </select>
       </div>
       
       <div class="form-group">
@@ -52,7 +73,7 @@
       </div>
       <div class="form-group">
         <label for="post_image">Post Image</label>
-        <input type="file"  name="post_image">
+        <input type="file" name="post_image">
       </div>
       <div class="form-group">
         <label for="post_tags">Post Tags</label>
