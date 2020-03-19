@@ -23,25 +23,25 @@
       }
 
     if (isset($_POST['update_post'])) {
-        $update_post_title = $_POST['post_title'];
-        $update_post_author = $_POST['post_author'];
+        $update_post_title    = $_POST['post_title'];
+        $update_post_author   = $_POST['post_author'];
         $update_post_category = $_POST['post_category'];
-        $update_post_status = $_POST['post_status'];
-        $post_image = $_FILES['post_image']['name'];
-        $post_image_temp = $_FILES['post_image']['tmp_name'];
-        $update_post_tags = $_POST['post_tags'];
-        $update_post_content = $_POST['post_content'];
+        $update_post_status   = $_POST['post_status'];
+        $post_image           = $_FILES['post_image']['name'];
+        $post_image_temp      = $_FILES['post_image']['tmp_name'];
+        $update_post_tags     = $_POST['post_tags'];
+        $update_post_content  = $_POST['post_content'];
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
         $query = "UPDATE posts SET "; 
-        $query .= "post_title = '$update_post_title', ";
-        $query .= "post_author = '$update_post_author', ";
+        $query .= "post_title       = '$update_post_title', ";
+        $query .= "post_author      = '$update_post_author', ";
         $query .= "post_category_id = '$update_post_category', ";
-        $query .= "post_status = '$update_post_status', ";
-        $query .= "post_image = '$post_image', ";
-        $query .= "post_tags = '$update_post_tags', ";
-        $query .= "post_content = '$update_post_content' ";
-        $query .= "WHERE post_id = '$edit_post_id' ";
+        $query .= "post_status      = '$update_post_status', ";
+        $query .= "post_image       = '$post_image', ";
+        $query .= "post_tags        = '$update_post_tags', ";
+        $query .= "post_content     = '$update_post_content' ";
+        $query .= "WHERE post_id    = '$edit_post_id' ";
 
         $update_post_query = mysqli_query($connection, $query);
         confirm_query($update_post_query);
