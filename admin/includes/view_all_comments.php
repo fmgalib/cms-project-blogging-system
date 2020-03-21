@@ -21,18 +21,7 @@
       <tbody>
 
 
-        <!-- <?php  
-        // Delete posts
-
-        if (isset($_GET['delete'])) {
-          $delete_post_id = $_GET['delete'];
-
-          $query = "DELETE FROM posts WHERE post_id = '$delete_post_id'";
-          $delete_query = mysqli_query($connection, $query);
-        }
-
-
-        ?> -->
+        
 
         <?php
 
@@ -76,9 +65,23 @@
             echo "<td>$comment_date</td>";
             echo "<td><a href='posts.php?source=edit_post&p_id=' >Approve</a></td>";
             echo "<td><a href='posts.php?delete='>Unapprove</a></td>";
-            echo "<td><a href='posts.php?delete='>Delete</a></td>";
+            echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
         }
+
+        
+        // Delete Comments
+
+        if (isset($_GET['delete'])) {
+          $delete_comment_id = $_GET['delete'];
+
+          $query = "DELETE FROM comments WHERE comment_id = '$delete_comment_id'";
+          $delete_query = mysqli_query($connection, $query);
+          header("Location: comments.php");
+        }
+
+
+        
 
         ?>
 
