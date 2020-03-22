@@ -77,11 +77,11 @@
         // Delete Comments
 
         if (isset($_GET['delete'])) {
-          $delete_comment_id = $_GET['delete'];
+          $delete_user_id = $_GET['delete'];
 
-          $query = "DELETE FROM comments WHERE comment_id = '$delete_comment_id'";
+          $query = "DELETE FROM users WHERE user_id = '$delete_user_id'";
           $delete_query = mysqli_query($connection, $query);
-          header("Location: comments.php");
+          header("Location: users.php");
         }
 
 
