@@ -67,7 +67,7 @@
             // echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
             // }
 
-            echo "<td><a href='users.php?delete=$user_id'>Edit</a></td>";
+            echo "<td><a href='users.php?source=edit_user&u_id=$user_id'>Edit</a></td>";
             echo "<td><a href='users.php?delete=$user_id'>Delete</a></td>";
             echo "</tr>";
         }

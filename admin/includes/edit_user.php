@@ -1,26 +1,57 @@
 <?php  
 
-  if (isset($_POST['create_user'])) {
-      $user_name = $_POST['user_name'];
-      $user_fname = $_POST['user_fname'];
-      $user_lname = $_POST['user_lname'];
-      $user_email = $_POST['user_email'];
-      $user_password = $_POST['user_password'];
-      $user_role = $_POST['user_role'];
+  if (isset($_GET['u_id'])) {
+      $edit_user_id = $_GET['u_id'];
+    }
 
-      $user_image = $_FILES['user_image']['name'];
-      $user_image_temp = $_FILES['user_image']['tmp_name'];
-      
-      move_uploaded_file($user_image_temp, "../images/$user_image");
+    $query = "SELECT * FROM users WHERE user_id = '$edit_user_id' ";
+    $select_user_query = mysqli_query($connection, $query);
 
-      $query = "INSERT INTO  users(user_name, user_fname, user_lname, user_email, user_password, user_image, user_role) VALUES('$user_name', '$user_fname', '$user_lname', '$user_email', '$user_password', '$user_image', '$user_role') ";
+    while ($row = mysqli_fetch_assoc($select_user_query)) {
+        $user_id            = $row['user_id'];
+        $user_name          = $row['user_name'];
+        $user_fname         = $row['user_fname'];
+        $user_lname         = $row['user_lname'];
+        $user_email         = $row['user_email'];
+        $user_password      = $row['user_password'];
+        $user_role          = $row['user_role'];
+        $user_image         = $row['user_image'];
+        
 
-      $create_user_query = mysqli_query($connection, $query);
+      }
 
-      confirm_query($create_user_query);
 
-      header("Location: users.php");
-  }
+
+
+  if (isset($_POST['update_user'])) {
+        $update_user_name       = $_POST['user_name'];
+        $update_user_fname      = $_POST['user_fname'];
+        $update_user_lname      = $_POST['user_lname'];
+        $update_user_email      = $_POST['user_email'];
+        $update_user_password   = $_POST['user_password'];
+        $update_user_image      = $_FILES['user_image']['name'];
+        $update_user_image_temp = $_FILES['user_image']['tmp_name'];
+        $update_user_role       = $_POST['user_role'];
+        
+        move_uploaded_file($post_image_temp, "../images/$user_image");
+
+        $query = "UPDATE users SET "; 
+        $query .= "user_name        = '$update_user_name', ";
+        $query .= "user_fname       = '$update_user_fname', ";
+        $query .= "user_lname       = '$update_user_lname', ";
+        $query .= "user_email       = '$update_user_email', ";
+        $query .= "user_password    = '$update_user_password', ";
+        $query .= "user_image       = '$update_user_image', ";
+        $query .= "user_role        = '$update_user_role' ";
+        $query .= "WHERE user_id    = '$edit_user_id' ";
+        
+        $update_user_query = mysqli_query($connection, $query);
+        confirm_query($update_user_query);
+
+        header("Location: users.php");
+        
+
+      }  
 
 ?>
 
@@ -36,30 +67,38 @@
     <form action="" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="user_name">User Name</label>
-        <input type="text" class="form-control" name="user_name">
+        <input type="text" class="form-control" name="user_name" value="<?php echo $user_name; ?>">
       </div>
       <div class="form-group">
         <label for="user_fname">First Name</label>
-        <input type="text" class="form-control" name="user_fname">
+        <input type="text" class="form-control" name="user_fname" value="<?php echo $user_fname; ?>">
       </div>
       <div class="form-group">
         <label for="user_lname">Last Name</label>
-        <input type="text" class="form-control" name="user_lname">
+        <input type="text" class="form-control" name="user_lname" value="<?php echo $user_lname; ?>">
       </div>
       <div class="form-group">
         <label for="user_email">Email</label>
-        <input type="text" class="form-control" name="user_email">
+        <input type="text" class="form-control" name="user_email" value="<?php echo $user_email; ?>">
       </div>
       <div class="form-group">
         <label for="user_password">Passsword</label>
-        <input type="text" class="form-control" name="user_password">
+        <input type="text" class="form-control" name="user_password" value="<?php echo $user_password; ?>">
       </div>
       <div class="form-group">
-        <label for="post_category">User Role</label><br>
-        <select name="user_role" id="">
+        <label for="user_role">User Role</label><br>
+        <select name="user_role" id="" >
 
-            <option>Admin</option>
-            <option>Subscriber</option>
+            <option><?php echo $user_role; ?></option>
+            <?php 
+
+            if ($user_role == "Admin") {
+              echo "<option>Subscriber</option>";
+            }else{
+              echo "<option>Admin</option>";
+            }
+
+            ?>
 
         </select>
       </div>
@@ -70,7 +109,7 @@
       </div>
       
       <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_user" value="Add User">
+        <input class="btn btn-primary" type="submit" name="update_user" value="Update">
       </div>
     </form>
 
