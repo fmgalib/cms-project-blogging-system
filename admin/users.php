@@ -34,7 +34,7 @@
                     }
 
                         switch ($source) {
-                            case 'add-user':
+                            case 'add_user':
                             include "includes/add_user.php"; 
                             break;
 
