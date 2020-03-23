@@ -21,8 +21,6 @@
       }
 
 
-
-
   if (isset($_POST['update_user'])) {
         $update_user_name       = $_POST['user_name'];
         $update_user_fname      = $_POST['user_fname'];
