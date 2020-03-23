@@ -23,7 +23,7 @@
 
                         <h1 class="page-header">
                             Welcome to Admin Panel
-                            <small>Author</small>
+                            <small><?php echo $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ; ?></small>
                         </h1>
                         
                     </div>

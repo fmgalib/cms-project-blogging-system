@@ -1,5 +1,7 @@
 <?php include "db.php"; ?>
 
+<?php session_start(); ?>
+
 <?php 
 
 	if (isset($_POST['login'])) {
@@ -22,6 +24,13 @@
 		}
 
 		if ($username == $db_user_name && $password == $db_user_password) {
+
+			$_SESSION['user_name'] 	= $db_user_name;
+			$_SESSION['user_fname'] = $db_user_fname;
+			$_SESSION['user_lname'] = $db_user_lname;
+			$_SESSION['user_role'] 	= $db_user_role;
+
+
 			header("location: ../admin");
 		}else{
 			header("location: ../index.php");
