@@ -52,7 +52,7 @@
       </div>
       <div class="form-group">
         <label for="user_password">Passsword</label>
-        <input type="passsword" class="form-control" name="user_password">
+        <input type="password" class="form-control" name="user_password">
       </div>
       <div class="form-group">
         <label for="post_category">User Role</label><br>

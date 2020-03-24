@@ -169,6 +169,29 @@
                 </div>
                 <!-- /.row -->
 
+
+<?php  
+
+    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+    $select_draft_posts = mysqli_query($connection, $query);
+    $draft_post_count = mysqli_num_rows($select_draft_posts);
+
+    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+    $select_unapproved_comment = mysqli_query($connection, $query);
+    $unapproved_comment_count = mysqli_num_rows($select_unapproved_comment);
+
+    $query = "SELECT * FROM users WHERE user_role = 'Subscriber'";
+    $select_subscriber = mysqli_query($connection, $query);
+    $subscriber_count = mysqli_num_rows($select_subscriber);
+
+
+?>
+
+
+
+
+
+
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
@@ -179,10 +202,10 @@
 
           <?php  
 
-          $element_text = ['Posts', 'Comments', 'Users', 'Categories'];
-          $element_count = [$post_count, $comment_count, $user_count, $category_count];
+          $element_text = ['Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+          $element_count = [$post_count, $draft_post_count, $comment_count, $unapproved_comment_count, $user_count, $subscriber_count, $category_count];
 
-          for($i = 0; $i < 4; $i++ ){
+          for($i = 0; $i < 7; $i++ ){
             echo "['$element_text[$i]'" . "," . "$element_count[$i]],";
           }
 
