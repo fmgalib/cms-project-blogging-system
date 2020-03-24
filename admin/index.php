@@ -147,8 +147,8 @@
 
                                 $query = "SELECT * FROM categories";
                                 $select_all_categories = mysqli_query($connection, $query);
-                                $categories_count = mysqli_num_rows($select_all_categories);
-                                echo "<div class='huge'>$categories_count</div>";
+                                $category_count = mysqli_num_rows($select_all_categories);
+                                echo "<div class='huge'>$category_count</div>";
 
                                 ?>    
 
@@ -176,7 +176,20 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Data', 'Counts'],
-          ['Posts', 1000]
+
+          <?php  
+
+          $element_text = ['Posts', 'Comments', 'Users', 'Categories'];
+          $element_count = [$post_count, $comment_count, $user_count, $category_count];
+
+          for($i = 0; $i < 4; $i++ ){
+            echo "['$element_text[$i]'" . "," . "$element_count[$i]],";
+          }
+
+          ?>
+
+
+          // ['Posts', 1000]
           
         ]);
 
