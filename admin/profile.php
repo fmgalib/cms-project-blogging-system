@@ -1,27 +1,52 @@
+<?php include "includes/header.php" ?>
 <?php  
 
-  if (isset($_GET['u_id'])) {
-      $edit_user_id = $_GET['u_id'];
+    if (isset($_SESSION['user_name'])) {
+        $user_name = $_SESSION['user_name'];
+
+        $query = "SELECT * FROM users WHERE user_name = '$user_name'";
+        $select_user_profile_query = mysqli_query($connection, $query);
+
+        while ($row = mysqli_fetch_assoc($select_user_profile_query)) {
+            $user_id            = $row['user_id'];
+            $user_name          = $row['user_name'];
+            $user_fname         = $row['user_fname'];
+            $user_lname         = $row['user_lname'];
+            $user_email         = $row['user_email'];
+            $user_password      = $row['user_password'];
+            $user_role          = $row['user_role'];
+            $user_image         = $row['user_image'];
+        }
     }
 
-    $query = "SELECT * FROM users WHERE user_id = '$edit_user_id' ";
-    $select_user_query = mysqli_query($connection, $query);
+?>
 
-    while ($row = mysqli_fetch_assoc($select_user_query)) {
-        $user_id            = $row['user_id'];
-        $user_name          = $row['user_name'];
-        $user_fname         = $row['user_fname'];
-        $user_lname         = $row['user_lname'];
-        $user_email         = $row['user_email'];
-        $user_password      = $row['user_password'];
-        $user_role          = $row['user_role'];
-        $user_image         = $row['user_image'];
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
         
+<?php include "includes/nav.php" ?>
 
-      }
 
 
-  if (isset($_POST['update_user'])) {
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <h1 class="page-header">
+                            User Profile
+                            <small><?php echo $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ; ?></small>
+                        </h1>
+ <?php      
+    if (isset($_POST['update_user'])) {
         $update_user_name       = $_POST['user_name'];
         $update_user_fname      = $_POST['user_fname'];
         $update_user_lname      = $_POST['user_lname'];
@@ -41,27 +66,17 @@
         $query .= "user_password    = '$update_user_password', ";
         $query .= "user_image       = '$update_user_image', ";
         $query .= "user_role        = '$update_user_role' ";
-        $query .= "WHERE user_id    = '$edit_user_id' ";
+        $query .= "WHERE user_id    = '$user_id' ";
         
         $update_user_query = mysqli_query($connection, $query);
         confirm_query($update_user_query);
 
-        header("Location: users.php");
+        
         
 
-      }  
+      } 
 
 ?>
-
-
-
-
-<div class="card">
-  <div class="card-header">
-    <h3>Edit User</h3>
-  </div>
-  <div class="card-body">
-    
     <form action="" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="user_name">User Name</label>
@@ -107,11 +122,22 @@
       </div>
       
       <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="update_user" value="Update">
+        <input class="btn btn-primary" type="submit" name="update_user" value="Update Profile">
       </div>
     </form>
 
-  </div>
-</div>
+
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+<?php include "includes/footer.php" ?>
 
 
+    
