@@ -46,7 +46,7 @@
         $update_post_query = mysqli_query($connection, $query);
         confirm_query($update_post_query);
 
-        header("Location: posts.php");
+        echo "Post updated." . " " . "<a href='../post.php?p_id=$edit_post_id'>View post</a>";
         
 
       }  
