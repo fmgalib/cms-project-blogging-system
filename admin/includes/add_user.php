@@ -19,7 +19,7 @@
 
       confirm_query($create_user_query);
 
-      header("Location: users.php");
+      echo "User Created:" . " " . "<a href='users.php'>View Users</a>";
   }
 
 ?>
