@@ -96,10 +96,30 @@
         </select>
       </div>
       
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="post_status">Post Status</label>
         <input value="<?php echo $post_status ?>" type="text" class="form-control" name="post_status">
+      </div> -->
+
+      <div class="form-group">
+        <label for="post_status">Post Status</label><br>
+        <select name="post_status">
+          <option><?php echo $post_status; ?></option>
+        
+            <?php 
+
+            if ($post_status == "published") {
+              echo "<option>draft</option>";
+            }else{
+              echo "<option>published</option>";
+            }
+
+            ?>
+          
+
+        </select>
       </div>
+
       <div class="form-group">
         <label for="post_image">Post Image</label>
         <input type="file" name="post_image">
