@@ -1,3 +1,35 @@
+<?php  
+if (isset($_POST['checkBoxArray'])) {
+  foreach ($_POST['checkBoxArray'] as $checkBoxValue_id) {
+    
+  $bulk_options = $_POST['bulk_options'];
+
+  switch ($bulk_options) {
+
+    case 'published':
+      $query = "UPDATE posts SET post_status = '$bulk_options' WHERE post_id = '$checkBoxValue_id' ";
+      $update_publish_status = mysqli_query($connection,$query);
+      break;
+
+      case 'draft':
+      $query = "UPDATE posts SET post_status = '$bulk_options' WHERE post_id = '$checkBoxValue_id' ";
+      $update_publish_status = mysqli_query($connection,$query);
+      break;
+      
+      case 'delete':
+      $query = "DELETE FROM posts WHERE post_id = '$checkBoxValue_id'";
+      $delete_query = mysqli_query($connection,$query);
+      break;
+
+    default:
+      # code...
+      break;
+  }
+
+  }
+}
+?>
+
 
 <div class="card">
   <div class="card-header">
@@ -5,9 +37,32 @@
   </div>
   <div class="card-body">
 
+    <form action="" method="post">
     <table class="table table-hover">
+
+      <div id="bulkOptionContainer" class="col-md-4" style="padding: 0px">
+        
+        <select class="form-control" name="bulk_options" id="">
+          
+          <option value="">Select an option</option>
+          <option value="published">Publish</option>
+          <option value="draft">Draft</option>
+          <option value="delete">Delete</option>
+
+        </select>
+
+      </div>
+
+      <div class="col-md-4">
+        
+        <input type="submit" class="btn btn-success" name="submit" value="Apply">
+        <a class="btn btn-primary" href="add_post.php">Add New</a>
+      </div>
+
+
       <thead class="thead-dark">
         <tr>
+          <th scope="col"><input type="checkbox" id="selectAllBoxes" name=""></th>
           <th scope="col">ID</th>
           <th scope="col">Author</th>
           <th scope="col">Title</th>
@@ -53,6 +108,9 @@
             $post_status        = $row['post_status'];
 
             echo "<tr>";
+            ?>
+            <td><input class='checkBoxes' type='checkbox' name="checkBoxArray[]" value='<?php echo $post_id; ?>' ></td>
+            <?php
             echo "<td>$post_id</td>";
             echo "<td>$post_author</td>";
             echo "<td>$post_title</td>";
@@ -79,4 +137,5 @@
         
       </tbody>
     </table>
+    </form>
 </div>
