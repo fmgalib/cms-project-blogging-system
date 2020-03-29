@@ -22,7 +22,9 @@
 
       confirm_query($create_post_query);
 
-      header("Location: posts.php");
+      $the_post_id = mysqli_insert_id($connection);
+
+      echo "<p class='bg-success'>Post created. <a href='../post.php?p_id=$the_post_id'>View post </a>";
   }
 
 ?>
