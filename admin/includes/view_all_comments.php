@@ -1,7 +1,7 @@
 
 <div class="card">
   <div class="card-header">
-    <h3>View All Comments</h3>
+    <h2>View All Comments</h2>
   </div>
   <div class="card-body">
 
