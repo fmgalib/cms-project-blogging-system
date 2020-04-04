@@ -33,12 +33,24 @@
         
         move_uploaded_file($update_user_image_temp, "../images/$user_image");
 
+
+        $query = "SELECT randSalt FROM users";
+        $randSalt_query = mysqli_query($connection, $query);
+        if (!$randSalt_query) {
+            die("Query failed". mysql_error($connection));
+        }
+
+        $row = mysqli_fetch_array($randSalt_query);
+        $salt = $row['randSalt'];
+        $hashed_password = crypt($update_user_password, $salt);
+
+
         $query = "UPDATE users SET "; 
         $query .= "user_name        = '$update_user_name', ";
         $query .= "user_fname       = '$update_user_fname', ";
         $query .= "user_lname       = '$update_user_lname', ";
         $query .= "user_email       = '$update_user_email', ";
-        $query .= "user_password    = '$update_user_password', ";
+        $query .= "user_password    = '$hashed_password', ";
         $query .= "user_image       = '$update_user_image', ";
         $query .= "user_role        = '$update_user_role' ";
         $query .= "WHERE user_id    = '$edit_user_id' ";
@@ -81,7 +93,7 @@
       </div>
       <div class="form-group">
         <label for="user_password">Passsword</label>
-        <input type="text" class="form-control" name="user_password" value="<?php echo $user_password; ?>">
+        <input type="password" class="form-control" name="user_password" value="<?php echo $user_password; ?>">
       </div>
       <div class="form-group">
         <label for="user_role">User Role</label><br>
