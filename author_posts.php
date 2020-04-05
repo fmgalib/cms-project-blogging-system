@@ -25,7 +25,11 @@
 
                 <?php  
 
-                    $query = "SELECT * FROM posts";
+                if (isset($_GET['author'])) {
+                    $post_author = $_GET['author'];
+                }
+
+                    $query = "SELECT * FROM posts WHERE post_author = '$post_author'";
                     $all_posts_query = mysqli_query($connection, $query);
 
                         while ($row = mysqli_fetch_assoc($all_posts_query)) {
@@ -50,7 +54,7 @@
                         <a href="post.php?p_id=<?php echo $post_id; ?>"> <?php echo $post_title; ?> </a>
                     </h2>
                     <p class="lead">
-                        by <a href="author_posts.php?author=<?php echo $post_author; ?>"><?php echo $post_author; ?></a>
+                        by <?php echo $post_author; ?>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
                     <hr>
