@@ -71,7 +71,7 @@ if (isset($_POST['checkBoxArray'])) {
           <th scope="col">Image</th>
           <th scope="col">Tags</th>
           <th scope="col">Comments</th>
-          <th scope="col">Post views</th>
+          <th scope="col">Views</th>
           <th scope="col">Date</th>
           <th scope="col" colspan="2">Action</th>
         </tr>
@@ -79,18 +79,7 @@ if (isset($_POST['checkBoxArray'])) {
       <tbody>
 
 
-        <?php  
-        // Delete posts
-
-        if (isset($_GET['delete'])) {
-          $delete_post_id = $_GET['delete'];
-
-          $query = "DELETE FROM posts WHERE post_id = '$delete_post_id'";
-          $delete_query = mysqli_query($connection, $query);
-        }
-
-
-        ?>
+        
 
         <?php
 
@@ -128,12 +117,37 @@ if (isset($_POST['checkBoxArray'])) {
             echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
             echo "<td>$post_tags</td>";
             echo "<td>$post_comment_count</td>";
-            echo "<td>$post_views_count</td>";
+            echo "<td>$post_views_count <a href='posts.php?reset=$post_id'>Reset</a></td>";
             echo "<td>$post_date</td>";          
             echo "<td><a href='posts.php?source=edit_post&p_id=$post_id' >Edit</a></td>";
             echo "<td><a onClick=\" javascript: return confirm ('Are you sure you want to delete?'); \"  href='posts.php?delete=$post_id'>Delete</a></td>";
             echo "</tr>";
         }
+
+        ?>
+
+        <?php  
+        // Delete posts
+
+        if (isset($_GET['delete'])) {
+          $delete_post_id = $_GET['delete'];
+
+          $query = "DELETE FROM posts WHERE post_id = '$delete_post_id'";
+          $delete_query = mysqli_query($connection, $query);
+          header("Location: posts.php");
+        }
+
+
+        // Reset views
+
+        if (isset($_GET['reset'])) {
+          $the_post_id = $_GET['reset'];
+
+          $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =". mysqli_real_escape_string($connection, $_GET['reset'] ) . " ";
+          $delete_query = mysqli_query($connection, $query);
+          header("Location: posts.php");
+        }
+
 
         ?>
 
