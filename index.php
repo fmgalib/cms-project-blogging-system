@@ -25,7 +25,32 @@
 
                 <?php  
 
-                    $query = "SELECT * FROM posts";
+                    if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                    }else{
+
+                        $page_1 = "";
+                    }
+
+                    if ($page == "" || $page == 1) {
+                        
+                        $page_1 = 0;
+                    }else{
+
+                        $page_1 = ($page * 5) - 5;
+                    }
+
+
+
+
+                    $post_count_query = "SELECT * FROM posts"; 
+                    $result = mysqli_query($connection, $post_count_query);
+                    $post_count = mysqli_num_rows($result);
+
+                    $post_count = ceil($post_count / 5);
+
+
+                    $query = "SELECT * FROM posts LIMIT $page_1, 5";
                     $all_posts_query = mysqli_query($connection, $query);
 
                         while ($row = mysqli_fetch_assoc($all_posts_query)) {
@@ -46,6 +71,7 @@
                         
 
                     <!-- First Blog Post -->
+
                     <h2>
                         <a href="post.php?p_id=<?php echo $post_id; ?>"> <?php echo $post_title; ?> </a>
                     </h2>
@@ -79,6 +105,37 @@
 
         </div>
         <!-- /.row -->
+
+
+       <!--  <ul class="pagination">
+            
+            <?php 
+
+                for ($i=1; $i<=$post_count; $i++) { 
+                    
+                    echo "<li href='index.php?page=$i'>$i</li>";
+                }
+
+             ?>
+
+        </ul> -->
+
+
+  <ul class="pager justify-content-center">
+
+    <?php 
+
+                for ($i=1; $i<=$post_count; $i++) { 
+                    
+                    echo "<li class='page-item'><a class='page-link' href='index.php?page=$i'>$i</li>";
+                }
+
+             ?>
+
+  </ul>
+
+
+
 
         <hr>
 <!-- Footer -->
