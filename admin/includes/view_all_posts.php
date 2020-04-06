@@ -21,6 +21,11 @@ if (isset($_POST['checkBoxArray'])) {
       $delete_query = mysqli_query($connection,$query);
       break;
 
+      case 'reset':
+      $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = '$checkBoxValue_id'";
+      $reset_query = mysqli_query($connection,$query);
+      break;
+
     default:
       # code...
       break;
@@ -48,6 +53,7 @@ if (isset($_POST['checkBoxArray'])) {
           <option value="published">Publish</option>
           <option value="draft">Draft</option>
           <option value="delete">Delete</option>
+          <option value="reset">Reset views</option>
 
         </select>
 
