@@ -27,7 +27,11 @@
 
                 if (isset($_GET['p_id'])) {
                     $the_post_id = $_GET['p_id'];
-                }
+
+
+                    $post_views_count_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+                    $result = mysqli_query($connection, $post_views_count_query);
+                
 
                     $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
                     $all_posts_query = mysqli_query($connection, $query);
@@ -62,7 +66,7 @@
                             <hr>
 
 
-                <?php   }  ?>
+                <?php  } }  ?>
 
 
                <!-- Blog Comments -->
