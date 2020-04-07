@@ -129,9 +129,18 @@
 
     <?php 
 
+
                 for ($i=1; $i<=$post_count; $i++) { 
+
+                    if ($i == $page) {
+                        
+                        echo "<li class='active_link'><a class='page-link' href='index.php?page=$i'>$i</li>";
+                    }else{
+
+                        echo "<li class='page-item'><a class='page-link' href='index.php?page=$i'>$i</li>";
+                    }
                     
-                    echo "<li class='page-item'><a class='page-link' href='index.php?page=$i'>$i</li>";
+                    
                 }
 
              ?>

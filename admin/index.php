@@ -25,6 +25,8 @@
                             Welcome to Admin Panel
                             <small><?php echo $_SESSION['user_fname'] . ' ' . $_SESSION['user_lname'] ; ?></small>
                         </h1>
+
+                        
                         
                     </div>
                 </div>
