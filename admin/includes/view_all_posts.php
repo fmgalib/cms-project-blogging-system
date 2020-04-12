@@ -120,7 +120,7 @@ if (isset($_POST['checkBoxArray'])) {
             echo "<td>$cat_title</td>";
             }
             echo "<td>$post_status</td>";
-            echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
+            echo "<td><img width='50' src='../images/$post_image' alt='image'></td>";
             echo "<td>$post_tags</td>";
 
 
@@ -129,14 +129,14 @@ if (isset($_POST['checkBoxArray'])) {
             $count_comments = mysqli_num_rows($result);
 
 
-            echo "<td>$count_comments</td>";
+            echo "<td>$count_comments <a href='post_comments.php?p_id=$post_id' class='btn btn-primary btn-sm'>See all</a></td>";
 
 
 
             echo "<td>$post_views_count <a href='posts.php?reset=$post_id'>Reset</a></td>";
             echo "<td>$post_date</td>";          
-            echo "<td><a href='posts.php?source=edit_post&p_id=$post_id' >Edit</a></td>";
-            echo "<td><a onClick=\" javascript: return confirm ('Are you sure you want to delete?'); \"  href='posts.php?delete=$post_id'>Delete</a></td>";
+            echo "<td><a class='btn btn-success btn-sm' href='posts.php?source=edit_post&p_id=$post_id' >Edit</a></td>";
+            echo "<td><a onClick=\" javascript: return confirm ('Are you sure you want to delete?'); \" class='btn btn-danger btn-sm' href='posts.php?delete=$post_id'>Delete</a></td>";
             echo "</tr>";
         }
 
