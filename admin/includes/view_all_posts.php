@@ -1,4 +1,8 @@
-<?php  
+<?php include "delete_modal.php" ?>
+
+
+
+<?php
 if (isset($_POST['checkBoxArray'])) {
   foreach ($_POST['checkBoxArray'] as $checkBoxValue_id) {
     
@@ -136,11 +140,41 @@ if (isset($_POST['checkBoxArray'])) {
             echo "<td>$post_views_count <a href='posts.php?reset=$post_id'>Reset</a></td>";
             echo "<td>$post_date</td>";          
             echo "<td><a class='btn btn-success btn-sm' href='posts.php?source=edit_post&p_id=$post_id' >Edit</a></td>";
-            echo "<td><a onClick=\" javascript: return confirm ('Are you sure you want to delete?'); \" class='btn btn-danger btn-sm' href='posts.php?delete=$post_id'>Delete</a></td>";
+
+
+            echo "<td><a rel='$post_id' href='javascript: void(0)' class='delete_link btn btn-danger btn-sm'>Delete</a></td>";
+
+
             echo "</tr>";
         }
 
         ?>
+
+<!--   Delete modal Javascript     -->
+        <script>
+
+            $(document).ready(function(){
+                $(".delete_link").on('click', function() {
+
+                    var id = $(this).attr("rel");
+
+                    var delete_url = "posts.php?delete=" + id;
+
+                    $(".modal_delete_link").attr("href", delete_url);
+
+                    $("#deleteModal").modal('show');
+
+
+                });
+            });
+        </script>
+
+
+
+
+
+
+
 
         <?php  
         // Delete posts
